@@ -1,0 +1,34 @@
+QUOTTA CLUB v0.8 - FAIRSHARE AUTOMATICO
+======================================
+1. Faça backup da pasta v0.7 e mantenha seu .env.local. Nunca compartilhe sb_secret_.
+2. No Supabase SQL Editor, execute supabase/migrations/006_fairshare_automatico.sql.
+3. Para confirmação SEM depender de visitas ao site, execute também
+   supabase/migrations/007_agendador_automatico_opcional.sql.
+   Este segundo script depende da extensão pg_cron e das permissões do Supabase.
+   Se falhar, NÃO significa que o 006 falhou. Sem o cron, rodadas vencidas
+   são processadas quando um usuário consulta o calendário.
+4. Substitua os arquivos da v0.7 pelo projeto deste ZIP, preservando .env.local.
+5. Reinicie o INICIAR_QUOTTA.bat e abra http://localhost:3000/dashboard.
+
+REGRAS IMPLEMENTADAS
+- Dias úteis comuns: confirmação imediata no banco, se horário livre e mensalidade paga.
+- Sábados, domingos, feriados nacionais previstos no SQL, Carnaval e Ano-Novo:
+  pedidos entram em rodada FairShare e só são confirmados após o prazo.
+- Prazo da rodada: até 6h após o primeiro pedido, mas sempre pelo menos 1h antes
+  da abertura do dia de uso. Pedidos depois do prazo são recusados.
+- Prioridade: menor uso da MESMA categoria de data especial nos últimos 365 dias;
+  depois menor uso total de datas especiais; depois menor uso total;
+  por último, ordem de envio.
+- Cada pedido é integral: o sistema não fragmenta o período solicitado.
+- Reservas não podem se sobrepor, e manutenção bloqueia horários.
+- Mensalidade atual paga e nenhuma mensalidade anterior pendente são obrigatórias.
+- Histórico é calculado com reservas confirmadas/concluídas; não existe saldo
+  contratual de horas implementado nesta versão.
+- 007 (cron) é recomendado para confirmação realmente autônoma.
+
+ATENÇÃO: o rodízio desta versão usa prioridades históricas, mas não otimiza
+matematicamente o maior número possível de cotistas em todas as combinações.
+O layout visual da v0.7 foi preservado.
+
+TESTE ANTES DE PRODUÇÃO: use contas e dados de teste para conferir mensalidades,
+conflitos e prioridade em datas especiais. Não é homologação de produção.

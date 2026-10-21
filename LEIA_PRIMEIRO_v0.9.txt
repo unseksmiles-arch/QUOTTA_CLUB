@@ -1,0 +1,20 @@
+QUOTTA Club v0.9 — NOVA PÁGINA PÚBLICA
+
+Esta versão parte da v0.8 e altera a página inicial pública (/), com logo, Sea-Doo real, valores e chamadas para ação.
+Não altera a estrutura do banco nem as regras FairShare da v0.8.
+
+INSTALAÇÃO
+1. Faça backup da pasta atual.
+2. Extraia este ZIP e abra a pasta quotta-mvp.
+3. Copie seu .env.local da versão anterior para esta pasta (não compartilhe chaves secretas).
+4. Se ainda não executou a migração 006 da v0.8, ela continua necessária para o FairShare automático.
+5. Execute INICIAR_QUOTTA.bat.
+6. Acesse http://localhost:3000 para a página pública ou /login para entrar.
+
+ATENÇÃO
+- Lanchas e carros são apresentados como EM BREVE; nenhum bem novo é cadastrado automaticamente.
+- O combustível é por conta do usuário.
+- A opção Solicitar informações abre o aplicativo de e-mail do visitante; substitua por seu canal comercial oficial quando definido.
+- Parcelamento ilustrado sem juros ou taxas; confira as condições da operadora.
+- O rodízio automático depende das migrações e da validação funcional da v0.8.
+- O aplicativo deve ser testado antes de disponibilizar a cotistas reais.

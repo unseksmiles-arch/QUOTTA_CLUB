@@ -1,0 +1,9 @@
+QUOTTA CLUB v0.7 - foto correta do Sea-Doo Wake 170 2026
+
+Substituicao simples na v0.6:
+1) Copie public/seadoo-real-2026.jpg
+2) Substitua app/dashboard/page.tsx e app/globals.css
+3) Reinicie INICIAR_QUOTTA.bat
+
+A foto foi fornecida pelo proprietario. A imagem e exibida inteira, sem esticar nem cortar.
+Nao execute migrations SQL novamente. Preserve seu .env.local.

@@ -1,0 +1,4 @@
+import {NextRequest,NextResponse} from 'next/server';
+import {z} from 'zod';import {createClient} from '@/lib/supabase/server';
+const schema=z.object({assetId:z.string().uuid(),date:z.string().regex(/^\d{4}-\d{2}-\d{2}$/),deadline:z.string().datetime()});
+export async function POST(req:NextRequest){const sb=await createClient();const {data:{user}}=await sb.auth.getUser();if(!user)return NextResponse.json({error:'Não autorizado'},{status:401});const p=schema.safeParse(await req.json().catch(()=>null));if(!p.success)return NextResponse.json({error:'Dados inválidos'},{status:400});const {data,error}=await sb.rpc('create_booking_round',{p_asset:p.data.assetId,p_date:p.data.date,p_deadline:p.data.deadline});return NextResponse.json(error?{error:error.message}:{id:data},{status:error?400:201});}
